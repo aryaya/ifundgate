@@ -7,11 +7,22 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
+	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/wangch/icloudfund/routers"
+	"io"
 	"log"
+	"os"
 )
 
 func main() {
+	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
+
 	beego.EnableHttpListen = false
 	beego.EnableHttpTLS = true
 	beego.HttpsPort = 443
@@ -22,7 +33,7 @@ func main() {
 	beego.SetStaticPath("/js", "static/js")
 	beego.SetStaticPath("/img", "static/img")
 	beego.SetStaticPath("/fonts", "static/fonts")
-	beego.SetStaticPath("/ripple.txt", "./ripple.txt")
+	// beego.SetStaticPath("/ripple.txt", "./ripple.txt")
 	beego.SetStaticPath("/favicon.png", "./favicon.png")
 
 	conf, err := readIniFile("ripple.txt")
@@ -32,6 +43,14 @@ func main() {
 
 	beego.Get("/federation", func(ctx *context.Context) {
 		federation(ctx, conf)
+	})
+
+	beego.Get("/federation", func(ctx *context.Context) {
+		f, err := os.Open("ripple.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+		io.Copy(ctx.ResponseWriter, f)
 	})
 
 	// beego.Get("/quote", func(ctx *context.Context) {

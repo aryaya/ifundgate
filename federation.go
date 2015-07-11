@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/astaxie/beego/context"
 )
 
@@ -45,7 +46,7 @@ func federationErrorResp(msg string) *FederationResp {
 	}
 }
 
-func federationSucessResp(conf *txtConf, domain, destination string) *FederationResp {
+func federationSucessResp(conf *txtConf, destination string) *FederationResp {
 	currencies := []Currency{}
 	for _, c := range conf.currencies {
 		currencies = append(currencies, Currency{c, conf.accounts})
@@ -115,10 +116,9 @@ func federationSucessResp(conf *txtConf, domain, destination string) *Federation
 	return &FederationResp{
 		Result: "success",
 		FederationJson: &Federation{
-			Domain:      domain,
 			Destination: destination,
 			Type:        "federation_record",
-			QuoteUrl:    "https://" + domain + "/quote",
+			QuoteUrl:    conf.quote_url,
 			Currencies:  currencies,
 			ExtraFields: fields,
 		},
@@ -140,13 +140,22 @@ func federation(ctx *context.Context, conf *txtConf) {
 		return
 	}
 
-	domain := ctx.Request.URL.Query().Get("domain")
-	if domain != conf.domain {
-		resp := federationErrorResp("the query domain must be " + conf.domain)
-		sendResp(resp, ctx)
-		return
-	}
+	// domain := ctx.Request.URL.Query().Get("domain")
+	// if domain != conf.domain {
+	// 	resp := federationErrorResp("the query domain must be " + conf.domain)
+	// 	sendResp(resp, ctx)
+	// 	return
+	// }
 
-	resp := federationSucessResp(conf, domain, destination)
+	resp := federationSucessResp(conf, destination)
 	sendResp(resp, ctx)
+}
+
+func sendResp(resp interface{}, ctx *context.Context) error {
+	b, err := json.Marshal(resp)
+	if err != nil {
+		return err
+	}
+	ctx.ResponseWriter.Write(b)
+	return nil
 }

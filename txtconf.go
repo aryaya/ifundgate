@@ -10,8 +10,8 @@ import (
 )
 
 type txtConf struct {
-	currencies []string
-	// domain         string
+	currencies     []string
+	domain         string
 	accounts       string
 	hotwallets     []string
 	federation_url string

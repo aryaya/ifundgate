@@ -10,13 +10,14 @@ import (
 )
 
 type txtConf struct {
-	currencies     []string
-	domain         string
+	currencies []string
+	// domain         string
 	accounts       string
 	hotwallets     []string
 	federation_url string
-	withdrawalFee  float64
-	transferFee    float64
+	quote_url      string
+	// withdrawalFee  float64
+	// transferFee    float64
 }
 
 func readIniFile(fname string) (*txtConf, error) {
@@ -35,13 +36,13 @@ func readIniFile(fname string) (*txtConf, error) {
 		conf.currencies = append(conf.currencies, k)
 	}
 
-	m, err = iniConf.GetSection("domain")
-	if err != nil {
-		return nil, err
-	}
-	for k, _ := range m {
-		conf.domain = k
-	}
+	// m, err = iniConf.GetSection("domain")
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// for k, _ := range m {
+	// 	conf.domain = k
+	// }
 
 	m, err = iniConf.GetSection("accounts")
 	if err != nil {
@@ -60,16 +61,17 @@ func readIniFile(fname string) (*txtConf, error) {
 	}
 
 	conf.federation_url = iniConf.String("federation_url")
+	conf.quote_url = iniConf.String("quote_url")
 
-	conf.withdrawalFee, err = iniConf.Float("fees::withdrawal")
-	if err != nil {
-		log.Println("fees::withdrawal error:", err)
-	}
+	// conf.withdrawalFee, err = iniConf.Float("fees::withdrawal")
+	// if err != nil {
+	// 	log.Println("fees::withdrawal error:", err)
+	// }
 
-	conf.transferFee, err = iniConf.Float("fees::transfer")
-	if err != nil {
-		log.Println("fees::transfer error:", err)
-	}
+	// conf.transferFee, err = iniConf.Float("fees::transfer")
+	// if err != nil {
+	// 	log.Println("fees::transfer error:", err)
+	// }
 
 	return conf, nil
 }

@@ -15,4 +15,7 @@ iwsZ7gxHFzu2xbj8YMf4UvK1PrDEMuxGkf
 ine3v1DStiLfncJiCEgyfFct1i9t6M7z9E
 
 [federation_url]
-http://localhost:8080/federation
+https://icloudfund.cn/federation
+
+[quote_url]
+http://localhost:8080/quote

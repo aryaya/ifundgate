@@ -7,7 +7,7 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
-	_ "ifund/routers"
+	_ "github.com/wangch/icloudfund/routers"
 	"log"
 )
 
@@ -34,9 +34,9 @@ func main() {
 		federation(ctx, conf)
 	})
 
-	beego.Get("/quote", func(ctx *context.Context) {
-		quote(ctx, conf)
-	})
+	// beego.Get("/quote", func(ctx *context.Context) {
+	// 	quote(ctx, conf)
+	// })
 
 	beego.Run()
 }

@@ -7,17 +7,12 @@ HKD
 JPY
 LTC
 
-[domain]
-icloudfund.com
-
 [accounts]
-isfhdiF6pTo1excweSfYpgH6V8UhNGF3yQ
+iN8sGowQCg1qptWcJG1WyTmymKX7y9cpmr
 
 [hotwallets]
+iwsZ7gxHFzu2xbj8YMf4UvK1PrDEMuxGkf
+ine3v1DStiLfncJiCEgyfFct1i9t6M7z9E
 
 [federation_url]
-http://192.168.0.254:8080/federation
-
-[fees]
-withdrawal=0
-transfer=0
+http://localhost:8080/federation

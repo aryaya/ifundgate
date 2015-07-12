@@ -119,7 +119,7 @@ func federationSucessResp(conf *txtConf, destination string) *FederationResp {
 			Domain:      conf.domain,
 			Destination: destination,
 			Type:        "federation_record",
-			QuoteUrl:    conf.quote_url,
+			QuoteUrl:    "https://" + conf.domain + "/quote",
 			Currencies:  currencies,
 			ExtraFields: fields,
 		},

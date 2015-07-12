@@ -81,15 +81,5 @@ func readIniFile(fname string) (*txtConf, error) {
 		break
 	}
 
-	// conf.withdrawalFee, err = iniConf.Float("fees::withdrawal")
-	// if err != nil {
-	// 	log.Println("fees::withdrawal error:", err)
-	// }
-
-	// conf.transferFee, err = iniConf.Float("fees::transfer")
-	// if err != nil {
-	// 	log.Println("fees::transfer error:", err)
-	// }
-
 	return conf, nil
 }

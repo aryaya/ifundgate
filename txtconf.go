@@ -30,18 +30,20 @@ func readIniFile(fname string) (*txtConf, error) {
 
 	m, err := iniConf.GetSection("currencies")
 	if err != nil {
-		return nil, err
+		log.Println(err)
 	}
 	for k, _ := range m {
 		conf.currencies = append(conf.currencies, k)
+		break
 	}
 
 	m, err = iniConf.GetSection("domain")
 	if err != nil {
-		return nil, err
+		log.Println(err)
 	}
 	for k, _ := range m {
 		conf.domain = k
+		break
 	}
 
 	m, err = iniConf.GetSection("accounts")
@@ -50,6 +52,7 @@ func readIniFile(fname string) (*txtConf, error) {
 	}
 	for k, _ := range m {
 		conf.accounts = k
+		break
 	}
 
 	m, err = iniConf.GetSection("hotwallets")
@@ -60,8 +63,23 @@ func readIniFile(fname string) (*txtConf, error) {
 		conf.hotwallets = append(conf.hotwallets, k)
 	}
 
-	conf.federation_url = iniConf.String("federation_url")
-	conf.quote_url = iniConf.String("quote_url")
+	m, err = iniConf.GetSection("federation_url")
+	if err != nil {
+		log.Println(err)
+	}
+	for k, _ := range m {
+		conf.federation_url = k
+		break
+	}
+
+	m, err = iniConf.GetSection("quote_url")
+	if err != nil {
+		log.Println(err)
+	}
+	for k, _ := range m {
+		conf.quote_url = k
+		break
+	}
 
 	// conf.withdrawalFee, err = iniConf.Float("fees::withdrawal")
 	// if err != nil {

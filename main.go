@@ -11,6 +11,7 @@ import (
 	_ "github.com/wangch/icloudfund/routers"
 	"io"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -51,11 +52,21 @@ func main() {
 			log.Fatal(err)
 		}
 		io.Copy(ctx.ResponseWriter, f)
+		f.Close()
 	})
 
-	// beego.Get("/quote", func(ctx *context.Context) {
-	// 	quote(ctx, conf)
-	// })
+	beego.Get("/quote", func(ctx *context.Context) {
+		// http.Get(ctx.Request)
+		u := conf.quote_url + ctx.Request.URL.RawQuery
+		log.Println(u)
+		r, err := http.Get(u)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		io.Copy(ctx.ResponseWriter, r.Body)
+		r.Body.Close()
+	})
 
 	beego.Run()
 }

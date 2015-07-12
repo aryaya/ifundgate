@@ -34,7 +34,6 @@ func readIniFile(fname string) (*txtConf, error) {
 	}
 	for k, _ := range m {
 		conf.currencies = append(conf.currencies, k)
-		break
 	}
 
 	m, err = iniConf.GetSection("domain")

@@ -21,4 +21,4 @@ ine3v1DStiLfncJiCEgyfFct1i9t6M7z9E
 https://icloudfund.cn/federation
 
 [quote_url]
-http://localhost:8080/quote
+https://icloudfund.cn/quote

@@ -36,13 +36,13 @@ func readIniFile(fname string) (*txtConf, error) {
 		conf.currencies = append(conf.currencies, k)
 	}
 
-	// m, err = iniConf.GetSection("domain")
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// for k, _ := range m {
-	// 	conf.domain = k
-	// }
+	m, err = iniConf.GetSection("domain")
+	if err != nil {
+		return nil, err
+	}
+	for k, _ := range m {
+		conf.domain = k
+	}
 
 	m, err = iniConf.GetSection("accounts")
 	if err != nil {

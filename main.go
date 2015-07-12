@@ -45,7 +45,7 @@ func main() {
 		federation(ctx, conf)
 	})
 
-	beego.Get("/federation", func(ctx *context.Context) {
+	beego.Get("/ripple.txt", func(ctx *context.Context) {
 		f, err := os.Open("ripple.txt")
 		if err != nil {
 			log.Fatal(err)

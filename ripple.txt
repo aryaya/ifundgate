@@ -7,6 +7,9 @@ HKD
 JPY
 LTC
 
+[domain]
+icloudfund.cn
+
 [accounts]
 iN8sGowQCg1qptWcJG1WyTmymKX7y9cpmr
 

@@ -116,6 +116,7 @@ func federationSucessResp(conf *txtConf, destination string) *FederationResp {
 	return &FederationResp{
 		Result: "success",
 		FederationJson: &Federation{
+			Domain:      conf.domain,
 			Destination: destination,
 			Type:        "federation_record",
 			QuoteUrl:    conf.quote_url,
@@ -140,12 +141,12 @@ func federation(ctx *context.Context, conf *txtConf) {
 		return
 	}
 
-	// domain := ctx.Request.URL.Query().Get("domain")
-	// if domain != conf.domain {
-	// 	resp := federationErrorResp("the query domain must be " + conf.domain)
-	// 	sendResp(resp, ctx)
-	// 	return
-	// }
+	domain := ctx.Request.URL.Query().Get("domain")
+	if domain != conf.domain {
+		resp := federationErrorResp("the query domain must be " + conf.domain)
+		sendResp(resp, ctx)
+		return
+	}
 
 	resp := federationSucessResp(conf, destination)
 	sendResp(resp, ctx)

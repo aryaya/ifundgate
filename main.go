@@ -57,7 +57,7 @@ func main() {
 
 	beego.Get("/quote", func(ctx *context.Context) {
 		// http.Get(ctx.Request)
-		u := conf.quote_url + ctx.Request.URL.RawQuery
+		u := conf.quote_url + "?" + ctx.Request.URL.RawQuery
 		log.Println(u)
 		r, err := http.Get(u)
 		if err != nil {

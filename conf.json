@@ -1,0 +1,12 @@
+{
+ "Currencies": [
+  "USD",
+  "CNY",
+  "HKD",
+  "EUR",
+  "JPY"
+ ],
+ "ColdWallet": "iN8sGowQCg1qptWcJG1WyTmymKX7y9cpmr",
+ "Host": "icloudcion.org:8080",
+ "Domain": "isuncoin.com"
+}

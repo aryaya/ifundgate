@@ -6,7 +6,9 @@ package main
 
 import (
 	"encoding/json"
+
 	"github.com/astaxie/beego/context"
+	"github.com/wangch/icloudfund/controllers"
 )
 
 type FederationResp struct {
@@ -46,10 +48,10 @@ func federationErrorResp(msg string) *FederationResp {
 	}
 }
 
-func federationSucessResp(conf *txtConf, destination string) *FederationResp {
+func federationSucessResp(conf *controllers.Config, destination string) *FederationResp {
 	currencies := []Currency{}
-	for _, c := range conf.currencies {
-		currencies = append(currencies, Currency{c, conf.accounts})
+	for _, c := range conf.Currencies {
+		currencies = append(currencies, Currency{c, conf.ColdWallet})
 	}
 
 	contactField := ExtraField{
@@ -116,17 +118,17 @@ func federationSucessResp(conf *txtConf, destination string) *FederationResp {
 	return &FederationResp{
 		Result: "success",
 		FederationJson: &Federation{
-			Domain:      conf.domain,
+			Domain:      conf.Domain,
 			Destination: destination,
 			Type:        "federation_record",
-			QuoteUrl:    "https://" + conf.domain + "/quote",
+			QuoteUrl:    "https://" + conf.Domain + "/quote",
 			Currencies:  currencies,
 			ExtraFields: fields,
 		},
 	}
 }
 
-func federation(ctx *context.Context, conf *txtConf) {
+func federation(ctx *context.Context, conf *controllers.Config) {
 	typ := ctx.Request.URL.Query().Get("type")
 	if typ != "federation" {
 		resp := federationErrorResp("the query type must be federation")
@@ -142,8 +144,8 @@ func federation(ctx *context.Context, conf *txtConf) {
 	}
 
 	domain := ctx.Request.URL.Query().Get("domain")
-	if domain != conf.domain {
-		resp := federationErrorResp("the query domain must be " + conf.domain)
+	if domain != conf.Domain {
+		resp := federationErrorResp("the query domain must be " + conf.Domain)
 		sendResp(resp, ctx)
 		return
 	}

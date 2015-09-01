@@ -9,4 +9,7 @@ func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/deposit", &controllers.MainController{}, "get:Deposit")
 	beego.Router("/deposit/*", &controllers.MainController{}, "post:Deposit")
+
+	beego.Router("/buyicc", &controllers.MainController{}, "get:Deposit")
+	beego.Router("/buyicc/*", &controllers.MainController{}, "post:Deposit")
 }

@@ -7,6 +7,6 @@
   "JPY"
  ],
  "ColdWallet": "iN8sGowQCg1qptWcJG1WyTmymKX7y9cpmr",
- "Host": "icloudcion.org:8080",
+ "Host": "localhost:8080",
  "Domain": "isuncoin.com"
 }

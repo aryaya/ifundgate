@@ -23,9 +23,6 @@ func (c *MainController) Get() {
 	c.TplNames = "index.html"
 }
 
-func (c *MainController) DepositAmount() {
-}
-
 func (c *MainController) Deposit() {
 	r := c.Ctx.Request
 	u := *r.URL
